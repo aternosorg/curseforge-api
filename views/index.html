@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple CurseForge API</title>
+    <meta name="description" content="Simple API wrapper for the CurseForge page">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Play;
+            color: #2d3943;
+        }
+
+        body {
+            background: #f0f0f0;
+        }
+
+        h1, h2 {
+            color: #2b87d3;
+        }
+
+        h3 {
+            color: #0C396A;
+        }
+
+        .wrapper {
+            width: 1024px;
+            margin: 20px auto;
+        }
+
+        .url-scheme {
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .example {
+            font-family: monospace;
+            text-decoration: none;
+            color: #444;
+        }
+
+        .comment {
+            color: #888;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <h1>Simple CurseForge API</h1>
+    This is a simple API for <a href="https://curseforge.com" target="_blank">curseforge.com</a>.<br/>
+    It mostly uses the same URL scheme as the CurseForge website. You can imagine this API like JSON glasses for
+    CurseForge.<br/>
+    The API tries to directly fetch the data on request, but all requests are cached for 1 hour. A client-side cache is
+    also recommended.<br/>
+    <br/>
+    <br/>
+    <br/>
+    <h2>Currently supported methods</h2>
+
+    <h3>List projects</h3>
+    <h4 class="url-scheme">/{game}/{type}[?category={category}][&filter-game-version={game_version}][&filter-sort={field}][&page={page}]</h4>
+    <a class="example" href="/minecraft/mc-mods" target="_blank">/minecraft/mc-mods</a><br/>
+
+    <h3>Search projects</h3>
+    <h4 class="url-scheme">/{game}/{type}/search?search={search}</h4>
+    <a class="example" href="/minecraft/mc-mods/search?search=worldedit" target="_blank">/minecraft/mc-mods/search?search=worldedit</a><br/>
+
+    <h3>Project information</h3>
+    <h4 class="url-scheme">/{game}/{type}/{slug}</h4>
+    <a class="example" href="/minecraft/mc-mods/worldedit" target="_blank">/minecraft/mc-mods/worldedit</a><br/>
+
+    <h3>Project relations</h3>
+    <h4 class="url-scheme">/{game}/{type}/{slug}/relations/{relation}[?filter={field}][&page={page}]</h4>
+    <a class="example" href="/minecraft/mc-mods/journeymap/relations/dependencies" target="_blank">/minecraft/mc-mods/journeymap/relations/dependencies</a><br/>
+
+    <h3>List project files</h3>
+    <h4 class="url-scheme">/{game}/{type}/{slug}/files[?sort={field}][&page={page}]</h4>
+    <a class="example" href="/minecraft/mc-mods/worldedit/files" target="_blank">/minecraft/mc-mods/worldedit/files</a><br/>
+
+    <h3>File information</h3>
+    <h4 class="url-scheme">/{game}/{type}/{slug}/files/{file_id}</h4>
+    <a class="example" href="/minecraft/mc-mods/worldedit/files/2725648" target="_blank">/minecraft/mc-mods/worldedit/files/2725648</a><br/>
+
+    <h3>Download information</h3>
+    <h4 class="url-scheme">/{game}/{type}/{slug}/download/{file_id}</h4>
+    <a class="example" href="/minecraft/mc-mods/worldedit/download/2725648" target="_blank">/minecraft/mc-mods/worldedit/download/2725648</a><br/>
+
+    <h3>List categories</h3>
+    <h4 class="url-scheme">/other/{game}/{type}/categories</h4>
+    <a class="example" href="/other/minecraft/mc-mods/categories" target="_blank">/other/minecraft/mc-mods/categories</a><br/>
+
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

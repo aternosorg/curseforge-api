@@ -1,0 +1,24 @@
+{
+  "port": 3000,
+  "caching": true,
+  "cache": {
+    "success": 3600000,
+    "error": 600000
+  },
+  "baseUrl": "https://curseforge.com/",
+  "rediscache": false,
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  },
+  "graylog": {
+    "enabled": false,
+    "host": "host",
+    "port": 12201
+  },
+  "ssl":{
+    "cert": "./path/to/cert",
+    "key": "./path/to/key"
+  },
+  "userAgent": "curseforge-api/1.0.0"
+}

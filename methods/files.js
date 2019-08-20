@@ -23,6 +23,16 @@ class FilesMethod extends Method {
         if (req.query.sort !== undefined) {
             addopts += "&sort=" + req.query.sort;
         }
+        if (req.query['filter-game-version'] !== undefined) {
+            addopts += "&filter-game-version=" + req.query['filter-game-version'];
+        }else if (req.query['filter-game-version-name'] !== undefined) {
+            let response = await this.httpReq(`${this.config.baseUrl}${game}/${type}`);
+            let version = await helper.getGameVersions(this.cheerio.load(response))
+                .filter(v => v.name === req.query['filter-game-version-name'])[0];
+            if(version){
+                addopts += "&filter-game-version=" + version.id;
+            }
+        }
         let url = `${baseUrl}${game}/${type}/${slug}/files/all`;
 
         let data = [];

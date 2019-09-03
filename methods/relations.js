@@ -26,7 +26,13 @@ class RelationsMethod extends Method {
             page = parseInt(req.query.page);
         }
 
-        let data = [];
+        let data = {
+            projects: [],
+            pagination: {
+                page: 1,
+                lastPage: 1
+            }
+        };
         do {
             req.timers.start(`page ${page}`);
             let response = await this.httpReq(`${url}?page=${page}${addopts}`);
@@ -37,7 +43,11 @@ class RelationsMethod extends Method {
             if (pagination.exists && !pagination.pages.includes(String(page))) {
                 break;
             }
-            data = data.concat(helper.parseProjectList($, rows, this.config.baseUrl));
+            data.pagination = {
+                page: page,
+                lastPage: pagination.last || 1
+            };
+            data.projects = data.projects.concat(helper.parseProjectList($, rows, this.config.baseUrl));
             if (pagination.exists && pagination.lastPage) {
                 break;
             }
@@ -47,7 +57,7 @@ class RelationsMethod extends Method {
             page++;
         } while (!single && page <= 5);
 
-        if (single && data.length === 0) {
+        if (single && data.projects.length === 0) {
             return res.httpError(404, null);
         }
 

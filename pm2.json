@@ -1,0 +1,7 @@
+{
+  "name": "curseforge-api",
+  "script": "server.js",
+  "watch": true,
+  "instances": 8,
+  "exec_mode": "cluster"
+}

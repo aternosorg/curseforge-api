@@ -24,11 +24,17 @@ class ListMethod extends Method {
         const rows = $('div.project-listing-row');
 
         let pagination = helper.paginationInfo($);
-        if (!pagination.pages.includes(String(page))) {
+        if (pagination.exists && !pagination.pages.includes(String(page))) {
             return res.httpError(404, null);
         }
 
-        let data = helper.parseProjectList($, rows, this.config.baseUrl);
+        let data = {
+            projects: helper.parseProjectList($, rows, this.config.baseUrl),
+            pagination: {
+                page: page,
+                lastPage: pagination.last || 1
+            }
+        };
 
         await res.json(data);
     }

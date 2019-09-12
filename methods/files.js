@@ -35,7 +35,13 @@ class FilesMethod extends Method {
         }
         let url = `${baseUrl}${game}/${type}/${slug}/files/all`;
 
-        let data = [];
+        let data = {
+            files: [],
+            pagination: {
+                page: 1,
+                lastPage: 1
+            }
+        };
         do {
             req.timers.start(`page ${page}`);
             let response = await this.httpReq(`${url}?page=${page}${addopts}`);
@@ -46,7 +52,11 @@ class FilesMethod extends Method {
             if (pagination.exists && !pagination.pages.includes(String(page))) {
                 break;
             }
-            data = data.concat(helper.parseFileList($, rows, baseUrl, `${game}/${type}/${slug}/download/`));
+            data.pagination = {
+                page: page,
+                lastPage: pagination.last || 1
+            };
+            data.files = data.files.concat(helper.parseFileList($, rows, baseUrl, `${game}/${type}/${slug}/download/`));
             if (pagination.exists && pagination.lastPage) {
                 break;
             }
@@ -56,7 +66,7 @@ class FilesMethod extends Method {
             page++;
         } while (!single && page <= 5);
 
-        if (single && data.length === 0) {
+        if (single && data.files.length === 0) {
             return res.httpError(404, null);
         }
 

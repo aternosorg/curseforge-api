@@ -37,8 +37,8 @@ class FileMethod extends Method {
         data.additionalFiles = helper.parseFileList($, $('.project-file-listing > tbody > tr'), this.config.baseUrl, `${game}/${type}/${slug}/download/`);
 
         const changelog = $('div.flex > div.bg-accent.rounded > div.user-content');
-        data.changelog = changelog.html().replace(/(\s)+/g, " ").trim();
-        data.rawchangelog = changelog.text().replace(/(\s)+/g, " ").trim();
+        data.changelog = changelog.length ? changelog.html().replace(/(\s)+/g, " ").trim() : '';
+        data.rawchangelog = changelog.length ? changelog.text().replace(/(\s)+/g, " ").trim() : '';
 
         await res.json(data);
     }
